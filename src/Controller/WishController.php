@@ -15,7 +15,7 @@ class WishController extends AbstractController
     #[Route('/list', name: 'list')]
     public function list(WishRepository $wishRepository): Response
     {
-        //TODO récupérer la liste des wish et la renvoyer
+        // récupérer la liste des wish et la renvoyer
         $wishes = $wishRepository->findAll(["isPublished"=>true],["dateCreated"=>"DESC"]);
         return $this->render('wish/list.html.twig', ['wishes' => $wishes]);
     }
@@ -23,7 +23,7 @@ class WishController extends AbstractController
     #[Route('/{id}', name: 'show',requirements: ['id'=> '\d+'])]
     public function show(int $id,WishRepository $wishRepository ): Response
     {
-        //TODO récupérer le wish et le renvoyer
+        // récupérer le wish et le renvoyer
         $wish = $wishRepository->find($id);
         if(!$wish){
             throw $this->createNotFoundException("Oops ! Wish not found !");
@@ -44,7 +44,7 @@ class WishController extends AbstractController
             $this->addFlash('success',"Wish added !");
             return $this->redirectToRoute('wish_show',['id'=>$wish->getId()]);
         }
-        //TODO récupérer la liste des wish et la renvoyer
+        // récupérer la liste des wish et la renvoyer
         $wishes = $wishRepository->findBy(["isPublished"=>true],["dateCreated"=>"DESC"]);
 
 

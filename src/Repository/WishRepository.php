@@ -38,6 +38,20 @@ class WishRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findPublishWishes(){
+        $qb = $this->createQueryBuilder('w');
+        $qb->andWhere("w.isPublished = :isPublish")
+            ->setParameter("isPublish", true)
+            ->addOrderBy('w.dateCreated','DESC')
+            //jointure sur les attribut d'instance
+            ->leftJoin("w.category","cat")
+            //recuperation des colonnes de la jointure
+            ->addSelect("cat");
+
+        //renvoie instance de query
+        $query = $qb->getQuery();
+        return $query->getResult();
+    }
 
 //    /**
 //     * @return Wish[] Returns an array of Wish objects

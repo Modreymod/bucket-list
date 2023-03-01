@@ -6,7 +6,8 @@
     <article>
 {#        redirection vers la page detail#}
         <a href="{{  path('wish_show', {'id' : wish.id}) }}">
-    <p>{{ wish.title }}</p>
+    <p>{{ wish.title }} | {{ wish.category.name }}</p>
+
         </a>
     </article>
     {% endfor %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Wish;
 use App\Form\WishType;
+use App\Repository\CategoryRepository;
 use App\Repository\WishRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +17,8 @@ class WishController extends AbstractController
     public function list(WishRepository $wishRepository): Response
     {
         // récupérer la liste des wish et la renvoyer
-        $wishes = $wishRepository->findAll(["isPublished"=>true],["dateCreated"=>"DESC"]);
+       // $wishes = $wishRepository->findAll(["isPublished"=>true],["dateCreated"=>"DESC"]);
+        $wishes = $wishRepository->findPublishWishes();
         return $this->render('wish/list.html.twig', ['wishes' => $wishes]);
     }
 
@@ -46,9 +48,6 @@ class WishController extends AbstractController
         }
         // récupérer la liste des wish et la renvoyer
         $wishes = $wishRepository->findBy(["isPublished"=>true],["dateCreated"=>"DESC"]);
-
-
-
 
         return $this->render('wish/add.html.twig', ['wishForm' => $wishForm->createView()]);
     }

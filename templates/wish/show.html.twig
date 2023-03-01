@@ -13,6 +13,7 @@
             <div>Author : {{ wish.author }}</div>
 {#            <div>Is Published : {{ wish.isPublished }}</div>#}
             <div>Date Created : {{ wish.dateCreated | date('Y-m-d') }}</div>
+            <div>Category : {{ wish.category.name }}</div>
         </div>
     </div>
 {% endblock %}

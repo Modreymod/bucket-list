@@ -3,6 +3,13 @@
         <li><a href="{{ path('main_home') }}">Home</a></li>
         <li><a href="{{ path('main_aboutus') }}">About-Us</a></li>
         <li><a href="{{ path('wish_list') }}">WishList</a></li>
-        <li><a href="{{ path('wish_add') }}">Add Wish</a></li>
+        {# recupere instance de l'utilisateur connecté #}
+        {% if app.user %}
+            <li><a href="{{ path('wish_add') }}">Add Wish</a></li>
+            <li><a href="{{ path('app_logout') }}">Logout | Hello {{ app.user.userIdentifier }} !</a></li>
+        {% else %}
+            <li><a href="{{ path('app_login') }}">Login</a></li>
+            <li><a href="{{ path('app_register') }}">Register</a></li>
+        {% endif %}
     </ul>
 </nav>

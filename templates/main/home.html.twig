@@ -6,6 +6,8 @@
 
 {# si je redéfinis le contenu j'écrase ce qu'il y a dans la base #}
 {% block body %}
-    <h1>Welcome to Bucket-List !</h1>
+    <h1>Welcome to Bucket-List {% if app.user %}
+        {{ app.user.userIdentifier }}
+        {% endif %} !</h1>
 
 {% endblock %}

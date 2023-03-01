@@ -6,7 +6,7 @@ use App\Entity\Wish;
 use App\Form\WishType;
 use App\Repository\CategoryRepository;
 use App\Repository\WishRepository;
-use App\Utils\Censurator;
+use App\Services\Censurator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,6 +50,7 @@ class WishController extends AbstractController
         $wishForm->handleRequest($request);
 
         if($wishForm->isSubmitted() && $wishForm->isValid()){
+            //utilisation du service pour purifier les infos
             $wish->setTitle($censurator->purify($wish->getTitle()));
             $wish->setDescription($censurator->purify($wish->getDescription()));
             $wish->setDateCreated(new \DateTime());
